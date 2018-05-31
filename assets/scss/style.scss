@@ -1,0 +1,6 @@
+@import 'reset';
+@import 'vars';
+
+p {
+  @extend %p;
+}

@@ -16,6 +16,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "contentful": "^6.1.1",
+    "gsap": "^2.0.1",
+    "imagesloaded": "^4.1.4",
+    "masonry-layout": "^4.2.1",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {
@@ -23,6 +26,10 @@
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "node-sass": "^4.9.0",
+    "prettier": "^1.12.0",
+    "sass-loader": "^7.0.1",
+    "vue-style-loader": "^4.1.0"
   }
 }

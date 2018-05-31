@@ -29,15 +29,21 @@ module.exports = {
    ** Customize the progress bar color
    */
   loading: {
-    color: '#3B8070'
+    color: '#000000'
   },
   /*
    ** Build configuration
    */
+  vendor: [
+    'axios', 'masonry-layout', 'imagesloaded'
+  ],
   env: {
     CTF_SPACE_ID: config.CTF_SPACE_ID,
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
   },
+  css: [
+    '@/assets/scss/style.scss'
+  ],
   build: {
     /*
      ** Run ESLint on save

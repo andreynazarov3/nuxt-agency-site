@@ -1,14 +1,19 @@
 <template>
- <div>
-   <h1>Главная</h1>
-     <nuxt-link to="/cases">Кейсы</nuxt-link>
+  <div>
+    <Welcoming />
+    <Masonry />
   </div>
 </template>
 <script>
-
+import Welcoming from '~/components/Welcoming';
+import Masonry from '~/components/Masonry';
 export default {
-
-}
+  components: {
+    Welcoming,
+    Masonry,
+  },
+};
 </script>
-<style>
+<style lang="scss" scoped>
+@import '~/assets/scss/_vars.scss';
 </style>

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&subset=cyrillic');
+
+$basicFont: 'Open Sans', sans-serif;
+$mediumScreen: 'screen and (max-width: 1440px)';
+$bigTabletScreen: 'screen and (max-width: 1024px)';
+$tabletScreen: 'screen and (max-width: 767px)';
+$smallScreen: 'screen and (max-width: 480px)';
+$generalPadding: 15px;
+$headerHeight: 150px;
+
+%p {
+  font-family: $basicFont;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
