@@ -21,7 +21,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: lightgoldenrodyellow;
   padding: 0 $generalPadding;
   box-sizing: border-box;
 }

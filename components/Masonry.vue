@@ -24,6 +24,7 @@ export default {
         percentPosition: true,
         gutter: 0,
         itemSelector: '.masonry-item',
+        initLayout: false,
       },
     };
   },
@@ -32,27 +33,26 @@ export default {
     cases: 'getCases',
   }),
   watch: {
-    data() {
-      this.loaded();
-    },
+    // data() {
+    //   this.loaded();
+    // },
   },
   methods: {
     loaded() {
-      // all images are loaded
       ImagesLoaded(this.selector, () => {
-        this.$emit('masonry-images-loaded');
-        // activate mansonry grid
         const masonry = new Masonry(this.selector, this.options);
-        this.$emit('masonry-loaded', masonry);
-
-        // const { mosaic, mosaicItems } = this.$refs;
-        // const tl = new TimelineMax();
-        // tl
-        //   .to(mosaic, this.masonrySpeed, {
-        //     autoAlpha: 1,
-        //     delay: 1,
-        //   })
-        //   .staggerFromTo(mosaicItems, 1, { y: 100 }, { y: 0 }, 0.1);
+        function onLayout() {
+          TimelineMax.staggerTo(
+            document.querySelectorAll('.masonry-item'),
+            0.5,
+            {
+              autoAlpha: 1,
+            },
+            0.2,
+          );
+        }
+        masonry.on('layoutComplete', onLayout);
+        masonry.layout();
       });
     },
   },
@@ -65,14 +65,19 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/scss/_vars.scss';
 .masonry-container {
-  // visibility: hidden;
-  // opacity: 0;
   .grid-sizer,
   .masonry-item {
-    width: 33.333%;
+    visibility: hidden;
+    opacity: 0;
+    width: 25%;
+    @media #{$tabletScreen} {
+      width: 33.333%;
+    }
+    @media #{$mobileScreen} {
+      width: 50%;
+    }
   }
   .masonry-item {
-    // width: 33.333%;
     img {
       width: 100%;
       display: block;
