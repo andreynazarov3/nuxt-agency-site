@@ -20,10 +20,13 @@ const createStore = () => {
         return state.cases
       },
       getCaseById(state) {
-        return (id) => {          
+        return (id) => {
           return state.cases.find(item => item.fields.casePageUrl === id);
-        }       
-      }
+        }
+      },
+      getCasesForMainPage(state) {
+        return state.cases.filter(item => item.fields.showOnMainPage === true);
+      },
     },
     actions: {
       nuxtServerInit({

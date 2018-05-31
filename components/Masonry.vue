@@ -1,8 +1,14 @@
 <template>
-        <div ref="mosaic" class="masonry-container">
-          <div class="grid-sizer"></div>
-          <div ref="mosaicItems" class="masonry-item" :key="item.sys.id" v-for="item in cases">
+        <div class="masonry-container">         
+          <div class="masonry-item" :key="item.sys.id" v-for="item in cases">
             <nuxt-link :to="'/cases/'+item.fields.casePageUrl">
+            <div class="masonry-item-overlay">                
+              </div>   
+              <div class="masonry-item-desc">
+                <h2>{{ item.fields.title }}</h2>
+                <p>{{ item.fields.shortDesc }}</p>
+              </div>
+                         
               <img draggable="false"  :src="item.fields.previewImg" alt="">
             </nuxt-link>
           </div>
@@ -12,47 +18,53 @@
 import { mapGetters } from 'vuex';
 import TimelineMax from 'gsap';
 if (process.browser) {
-  var Masonry = require('masonry-layout');
+  var Isotope = require('isotope-layout');
+  require('isotope-packery');
   var ImagesLoaded = require('imagesloaded');
 }
 export default {
+  props: ['cases'],
   data: function() {
     return {
       selector: '.masonry-container',
       options: {
-        columnWidth: '.grid-sizer',
-        percentPosition: true,
-        gutter: 0,
         itemSelector: '.masonry-item',
         initLayout: false,
+        layoutMode: 'packery',
+        packery: {
+          gutter: 0,
+        },
+        percentPosition: true,
       },
     };
   },
-  components: {},
-  computed: mapGetters({
-    cases: 'getCases',
-  }),
   watch: {
-    // data() {
-    //   this.loaded();
-    // },
+    props() {
+      this.loaded();
+    },
   },
   methods: {
     loaded() {
       ImagesLoaded(this.selector, () => {
-        const masonry = new Masonry(this.selector, this.options);
+        const isotope = new Isotope(this.selector, this.options);
         function onLayout() {
-          TimelineMax.staggerTo(
+          console.log('leayour');
+          TimelineMax.staggerFromTo(
             document.querySelectorAll('.masonry-item'),
             0.5,
             {
+              autoAlpha: 0,
+              y: 300
+            },
+             {
               autoAlpha: 1,
+              y: 0
             },
             0.2,
           );
         }
-        masonry.on('layoutComplete', onLayout);
-        masonry.layout();
+        isotope.on('arrangeComplete', onLayout);
+        isotope.arrange();
       });
     },
   },
@@ -64,8 +76,29 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/_vars.scss';
+.masonry-item-desc,
+.masonry-item-overlay {
+  @extend %overlayPosition;
+}
+.masonry-item-desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: 300ms ease-in-out;
+  h2 {
+    @extend %p;
+    font-size: 30px;
+  }
+}
+.masonry-item-overlay {
+  background: white;
+  opacity: 0;
+  transition: 300ms ease-in-out;
+}
 .masonry-container {
-  .grid-sizer,
   .masonry-item {
     visibility: hidden;
     opacity: 0;
@@ -76,8 +109,18 @@ export default {
     @media #{$mobileScreen} {
       width: 50%;
     }
-  }
-  .masonry-item {
+    a {
+      display: block;
+      &:hover {
+        .masonry-item-desc {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+        .masonry-item-overlay {
+          opacity: 0.7;
+        }
+      }
+    }
     img {
       width: 100%;
       display: block;

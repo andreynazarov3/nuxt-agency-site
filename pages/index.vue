@@ -1,16 +1,22 @@
 <template>
   <div>
     <Welcoming />
-    <Masonry />
+    <Masonry :cases="cases" />
   </div>
 </template>
 <script>
 import Welcoming from '~/components/Welcoming';
 import Masonry from '~/components/Masonry';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     Welcoming,
     Masonry,
+  },
+  computed: {
+    ...mapGetters({
+      cases: 'getCasesForMainPage',
+    }),
   },
 };
 </script>

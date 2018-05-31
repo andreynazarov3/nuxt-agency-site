@@ -1,7 +1,7 @@
 <template>  
   <header>
       <div class="home">
-        <nuxt-link to="/">Главная</nuxt-link>
+        <nuxt-link to="/"><img src="~/assets/images/dobro.svg" alt=""></nuxt-link>
       </div>
       <div class="links">
         <nuxt-link to="/agency">Агентство</nuxt-link>
