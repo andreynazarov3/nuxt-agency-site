@@ -1,15 +1,17 @@
 <template>
         <div class="masonry-container">         
           <div class="masonry-item" :key="item.sys.id" v-for="item in cases">
-            <nuxt-link :to="'/cases/'+item.fields.casePageUrl">
+            <nuxt-link draggable="false" :to="'/cases/'+item.fields.casePageUrl">
             <div class="masonry-item-overlay">                
               </div>   
               <div class="masonry-item-desc">
                 <h2>{{ item.fields.title }}</h2>
                 <p>{{ item.fields.shortDesc }}</p>
-              </div>
-                         
-              <img draggable="false"  :src="item.fields.previewImg" alt="">
+              </div>           
+              <img 
+              draggable="false"  
+              :src="'/images/high/' + item.fields.previewImg"
+              />            
             </nuxt-link>
           </div>
         </div>
@@ -17,13 +19,16 @@
 <script>
 import { mapGetters } from 'vuex';
 import TimelineMax from 'gsap';
+import progressively from 'progressively'
 if (process.browser) {
   var Isotope = require('isotope-layout');
   require('isotope-packery');
   var ImagesLoaded = require('imagesloaded');
 }
+
 export default {
   props: ['cases'],
+
   data: function() {
     return {
       selector: '.masonry-container',
@@ -47,8 +52,7 @@ export default {
     loaded() {
       ImagesLoaded(this.selector, () => {
         const isotope = new Isotope(this.selector, this.options);
-        function onLayout() {
-          console.log('leayour');
+        function onLayout() {        
           TimelineMax.staggerFromTo(
             document.querySelectorAll('.masonry-item'),
             0.5,
@@ -98,8 +102,9 @@ export default {
   opacity: 0;
   transition: 300ms ease-in-out;
 }
-.masonry-container {
+.masonry-container {  
   .masonry-item {
+    overflow: hidden;
     visibility: hidden;
     opacity: 0;
     width: 25%;
@@ -110,7 +115,7 @@ export default {
       width: 50%;
     }
     a {
-      display: block;
+      display: block;      
       &:hover {
         .masonry-item-desc {
           transform: translateY(0px);

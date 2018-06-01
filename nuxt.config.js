@@ -35,7 +35,7 @@ module.exports = {
    ** Build configuration
    */
   vendor: [
-    'axios', 'masonry-layout', 'imagesloaded'
+    'axios', 'imagesloaded', 'vue-progressive-image'
   ],
   env: {
     CTF_SPACE_ID: config.CTF_SPACE_ID,
