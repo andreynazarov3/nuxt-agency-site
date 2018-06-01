@@ -74,6 +74,7 @@ export default {
   },
   mounted: function() {
     this.loaded();
+    
   },
 };
 </script>
