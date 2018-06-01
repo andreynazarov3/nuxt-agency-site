@@ -13,6 +13,7 @@
 <style lang="scss">
 @import '~/assets/scss/_vars.scss';
 header {
+  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;

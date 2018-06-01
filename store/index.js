@@ -35,7 +35,7 @@ const createStore = () => {
         return Promise.all([
             client.getEntries({
               content_type: 'case',
-              order: '-sys.createdAt',
+              order: '-sys.updatedAt',
             }),
           ])
           .then(([cases]) => {
