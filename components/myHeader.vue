@@ -34,7 +34,7 @@ header {
       text-decoration: underline;
     }
   }
-  @media #{$tabletScreen} {
+  @media #{$ipadPortrait} {
     display: none;
   }
 }

@@ -116,10 +116,10 @@ export default {
     visibility: hidden;
     opacity: 0;
     width: 25%;
-    @media #{$tabletScreen} {
+    @media #{$mediumLaptop} {
       width: 33.333%;
     }
-    @media #{$mobileScreen} {
+    @media #{$mobile} {
       width: 50%;
     }
     a {
