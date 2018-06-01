@@ -19,7 +19,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import TimelineMax from 'gsap';
-import progressively from 'progressively'
+
 if (process.browser) {
   var Isotope = require('isotope-layout');
   require('isotope-packery');
@@ -74,7 +74,7 @@ export default {
   },
   mounted: function() {
     this.loaded();
-    
+
   },
 };
 </script>
