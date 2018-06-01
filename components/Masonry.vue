@@ -1,10 +1,11 @@
 <template>
-        <div class="masonry-container">         
-          <div class="masonry-item" :key="item.sys.id" v-for="item in cases">
+      <div class="isotope-wrapper">
+        <div class="isotope-container">         
+          <div class="isotope-item" :key="item.sys.id" v-for="item in cases">
             <nuxt-link draggable="false" :to="'/cases/'+item.fields.casePageUrl">
-            <div class="masonry-item-overlay">                
+            <div class="isotope-item-overlay">                
               </div>   
-              <div class="masonry-item-desc">
+              <div class="isotope-item-desc">
                 <h2>{{ item.fields.title }}</h2>
                 <p>{{ item.fields.shortDesc }}</p>
               </div>           
@@ -15,6 +16,7 @@
             </nuxt-link>
           </div>
         </div>
+    </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -31,9 +33,9 @@ export default {
 
   data: function() {
     return {
-      selector: '.masonry-container',
+      selector: '.isotope-container',
       options: {
-        itemSelector: '.masonry-item',
+        itemSelector: '.isotope-item',
         initLayout: false,
         layoutMode: 'packery',
         packery: {
@@ -54,7 +56,7 @@ export default {
         const isotope = new Isotope(this.selector, this.options);
         function onLayout() {        
           TimelineMax.staggerFromTo(
-            document.querySelectorAll('.masonry-item'),
+            document.querySelectorAll('.isotope-item'),
             0.5,
             {
               autoAlpha: 0,
@@ -81,11 +83,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/_vars.scss';
-.masonry-item-desc,
-.masonry-item-overlay {
+.isotope-item-desc,
+.isotope-item-overlay {
   @extend %overlayPosition;
 }
-.masonry-item-desc {
+.isotope-item-desc {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,13 +100,18 @@ export default {
     font-size: 30px;
   }
 }
-.masonry-item-overlay {
+.isotope-item-overlay {
   background: white;
   opacity: 0;
   transition: 300ms ease-in-out;
 }
-.masonry-container {  
-  .masonry-item {
+.isotope-wrapper {
+    margin: 0 auto;
+    max-width: 1920px;
+    width: 100%;
+}
+.isotope-container {  
+  .isotope-item {
     overflow: hidden;
     visibility: hidden;
     opacity: 0;
@@ -118,11 +125,11 @@ export default {
     a {
       display: block;      
       &:hover {
-        .masonry-item-desc {
+        .isotope-item-desc {
           transform: translateY(0px);
           opacity: 1;
         }
-        .masonry-item-overlay {
+        .isotope-item-overlay {
           opacity: 0.7;
         }
       }
