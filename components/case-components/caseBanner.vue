@@ -1,16 +1,22 @@
 <template>
     <div class="banner">
-        <img :src="data.image_url_desktop" alt="">
+        <SVG-filter-image
+          :src="data.image.fields.url"
+          :src-placeholder="data.image.fields.base64"
+          :blurLevel="30"
+          :duration="300"
+          :filterId="data.image.sys.id"
+        ></SVG-filter-image>
         <div :style="{color: data.textColor}" class="banner-text">{{data.text}}</div>
     </div>
 </template>
 <script>
-
+import SVGFilterImage from "~/components/SVGFilterImage";
 export default {
   props: ['data'],
-  data: function() {
-    return {  }
-}
+  components: {
+    SVGFilterImage
+  },
 };
 </script>
 
@@ -22,8 +28,8 @@ export default {
     width: 100%;
   }
 }
-.banner-text {  
-  @extend  %p;
+.banner-text {
+  @extend %heading;
   @extend %absolutelyCentered;
   font-size: 60px;
 }

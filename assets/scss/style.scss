@@ -1,10 +1,4 @@
 @import 'reset';
 @import 'vars';
-
-p {
-  @extend %p;
-}
-
-body {
-  background: #F2F2F2;
-}
+@import 'fonts';
+@import 'general';

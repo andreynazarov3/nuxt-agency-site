@@ -1,12 +1,23 @@
 <template>
     <div class="manyImages">
-        <img :key="index" v-for="(item, index) in data.urls" :src="item" alt="">      
+         <SVG-filter-image
+          :filterId="item.sys.id"
+          :key="index" 
+          v-for="(item, index) in data.images" 
+          :src="item.fields.url"
+          :src-placeholder="item.fields.base64"
+          :blurLevel="5"
+          :duration="300"
+        ></SVG-filter-image>  
     </div>
 </template>
 <script>
-
+import SVGFilterImage from "~/components/SVGFilterImage";
 export default {
   props: ['data'],
+   components: {
+    SVGFilterImage
+  },
   data: function() {
     return {  }
 }

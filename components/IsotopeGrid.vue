@@ -11,13 +11,13 @@
               </div>           
               <img 
               draggable="false"  
-              :src="'/images/high/' + item.fields.previewImg"
+              :src="'/images/' + item.fields.previewImg"
               />            
             </nuxt-link>
           </div>
         </div>
     </div>
-</template>
+</template> 
 <script>
 import { mapGetters } from 'vuex';
 import TimelineMax from 'gsap';
@@ -96,8 +96,9 @@ export default {
   opacity: 0;
   transition: 300ms ease-in-out;
   h2 {
-    @extend %p;
+    @extend %heading;
     font-size: 30px;
+    color: black;
   }
 }
 .isotope-item-overlay {

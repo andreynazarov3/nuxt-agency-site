@@ -1,12 +1,21 @@
 <template>
     <div class="wideImage">
-        <img :src="data.url" alt="">      
+        <SVG-filter-image
+          :filterId="data.image.sys.id"
+          :src="data.image.fields.url"
+          :src-placeholder="data.image.fields.base64"
+          :blurLevel="10"
+          :duration="300"
+        ></SVG-filter-image>          
     </div>
 </template>
 <script>
-
+import SVGFilterImage from "~/components/SVGFilterImage";
 export default {
   props: ['data'],
+  components: {
+    SVGFilterImage
+  },
   data: function() {
     return {  }
 }

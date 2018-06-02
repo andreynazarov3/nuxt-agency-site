@@ -21,11 +21,13 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/scss/_vars.scss';
  .textBlockWithHeading {
-    padding-top: 70px;
-    max-width: 990px;
-    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 70px $generalPadding 0;
+    max-width: 990px + $generalPadding;
+    width:100%;
+    margin: 0 auto;    
     h2 {
-      @extend %p;
+      @extend %heading;
       font-size: 35px;
     }
     p {

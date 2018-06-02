@@ -33,7 +33,8 @@ const createStore = () => {
         commit
       }) {
         return Promise.all([
-            client.getEntries({
+          client.getEntries({
+              include: 10,
               content_type: 'case',
               order: '-sys.updatedAt',
             }),

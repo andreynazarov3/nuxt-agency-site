@@ -1,14 +1,16 @@
 <template>
 <div class="cases">
-  <Masonry :cases="cases" />
+  <myHeader />
+  <IsotopeGrid :cases="cases" />
 </div>
 </template>
 <script>
-import Masonry from '~/components/Masonry';
+import IsotopeGrid from '~/components/IsotopeGrid';
+import myHeader from '~/components/myHeader';
 import { mapGetters } from 'vuex';
 export default {
   components: {
-    Masonry,
+    IsotopeGrid, myHeader
   },
   computed: {
     ...mapGetters({

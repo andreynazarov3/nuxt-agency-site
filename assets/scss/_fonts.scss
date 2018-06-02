@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Pragmatica Extended';
+  src: url('/fonts/pragmatica/PragmaticaExtBold-Reg.eot');
+  src: url('/fonts/pragmatica/PragmaticaExtBold-Reg.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/pragmatica/PragmaticaExtBold-Reg.woff2') format('woff2'),
+      url('/fonts/pragmatica/PragmaticaExtBold-Reg.woff') format('woff'),
+      url('/fonts/pragmatica/PragmaticaExtBold-Reg.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pragmatica';
+  src: url('/fonts/pragmatica/PragmaticaBold-Reg.eot');
+  src: url('/fonts/pragmatica/PragmaticaBold-Reg.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/pragmatica/PragmaticaBold-Reg.woff2') format('woff2'),
+      url('/fonts/pragmatica/PragmaticaBold-Reg.woff') format('woff'),
+      url('/fonts/pragmatica/PragmaticaBold-Reg.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+// Roboto
+@import url('https://fonts.googleapis.com/css?family=Roboto&subset=cyrillic');

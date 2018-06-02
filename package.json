@@ -14,7 +14,6 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "antimoderate": "0.0.2",
     "axios": "^0.18.0",
     "contentful": "^6.1.1",
     "gsap": "^2.0.1",

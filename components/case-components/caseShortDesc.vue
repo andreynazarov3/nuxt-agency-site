@@ -32,7 +32,7 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/scss/_vars.scss';
 .short-description {
-  padding-top: 45px;
+  padding: 45px $generalPadding 0;
   max-width: 990px;
   margin: 0 auto;
   display: flex;
@@ -46,7 +46,7 @@ export default {
     color: #C1C1C1;
   }
   span {
-    @extend %p;
+    @extend %accent;
     font-size: 20px;
     &:after {
       content:', ';      
@@ -61,7 +61,7 @@ export default {
 }
 .undertext {
   @extend %p;
-  padding-top: 45px;
+  padding: 45px 0 0;
   line-height: 28px;
   font-size: 20px;
 }
