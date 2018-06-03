@@ -13,8 +13,9 @@ $mobile: 'screen and (max-width: 480px)';
 // sizes
 $generalPadding: 15px;
 $headerHeight: 150px;
-
-// positioning
+$headerMobileHeight: 66px;
+$headerGutter: 50px;
+$headerMobileGutter: 15px;
 
 %overlayPosition {
   position: absolute;

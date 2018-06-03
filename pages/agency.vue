@@ -1,6 +1,6 @@
 <template>
   <div>
-    <myHeader></myHeader>
+    <myHeader />
   </div>
 </template>
 <script>

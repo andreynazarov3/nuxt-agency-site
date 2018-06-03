@@ -3,7 +3,7 @@
         <SVG-filter-image
           :src="data.image.fields.url"
           :src-placeholder="data.image.fields.base64"
-          :blurLevel="30"
+          :blurLevel="50"
           :duration="300"
           :filterId="data.image.sys.id"
         ></SVG-filter-image>
@@ -24,6 +24,7 @@ export default {
 @import '~/assets/scss/_vars.scss';
 .banner {
   position: relative;
+  overflow: hidden;
   img {
     width: 100%;
   }

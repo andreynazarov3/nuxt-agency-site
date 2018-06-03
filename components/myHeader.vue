@@ -9,21 +9,30 @@
         <nuxt-link :style="{color:color}" to="/cases">Кейсы</nuxt-link>
         <nuxt-link :style="{color:color}" to="/contacts">Контакты</nuxt-link>
       </div>
+      <button :style="{color:color}"  class="mobile-menu-open" @click="openMobileMenu()">
+        Меню
+      </button>
       </div>
   </header>
 </template>
 <script>
-import Logo from "~/components/Logo"
+import Logo from '~/components/Logo';
+import { EventBus } from '~/components/event-bus.js';
 export default {
-  props:{ 
-    'color': {
-      default:'#000000'
-    }
+  props: {
+    color: {
+      default: '#000000',
+    },
   },
   components: {
-    Logo
-  }
-}
+    Logo,
+  },
+  methods: {
+    openMobileMenu() {
+      EventBus.$emit('openMobileMenu');
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -34,6 +43,11 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  padding: 0 $headerGutter;
+  box-sizing: border-box;
+  @media #{$ipadPortrait} {
+    padding: 0 $headerMobileGutter;
+  }
 }
 .header-content {
   width: 100%;
@@ -45,6 +59,9 @@ header {
   align-items: center;
   padding: 0;
   box-sizing: border-box;
+  @media #{$ipadPortrait} {
+    height: $headerMobileHeight;
+  }
 }
 .links {
   a {
@@ -52,6 +69,9 @@ header {
     font-size: 18px;
     margin-right: 53px;
     text-decoration: none;
+    &:last-child {
+      margin-right: 0;
+    }
     &:hover {
       text-decoration: underline;
     }
@@ -60,9 +80,15 @@ header {
     display: none;
   }
 }
-.home {
-  a {
-    margin-left: 53px;
+.mobile-menu-open {
+  @extend %p;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  @media #{$ipadPortrait} {
+    display: block;
   }
 }
 </style>

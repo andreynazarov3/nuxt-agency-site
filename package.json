@@ -20,7 +20,9 @@
     "imagesloaded": "^4.1.4",
     "isotope-layout": "^3.0.6",
     "isotope-packery": "^2.0.1",
-    "nuxt": "^1.0.0"
+    "nuxt": "^1.0.0",
+    "rellax": "^1.6.2",
+    "scrollmagic": "^2.0.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

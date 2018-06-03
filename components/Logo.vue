@@ -1,5 +1,5 @@
 <template>
-<svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120" height="27">
+<svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" :width="width" :height="height" viewBox="0 0 120 27">
 <!--Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch-->
   <defs>
     <path id="a" d="M119.988524 26.6968123H0V.01411716h119.988524z"/>
@@ -17,6 +17,16 @@
 </template>
 <script>
 export default {
-  props: ['color'],
+  props: {
+    color: {
+      default: '#000000',
+    },
+    width: {
+       default: '120',
+    },
+    height: {
+       default: '27',
+    }
+  },
 };
 </script>

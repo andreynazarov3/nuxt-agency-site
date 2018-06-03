@@ -34,8 +34,11 @@ export default {
   display:flex;
   justify-content: space-between;
   align-items: flex-start;
-  img {
+  .progressive-image {
     width: 48%;
+  }
+  img {
+    width: 100%;
     // max-width: 760px;
   }
 }

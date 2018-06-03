@@ -54,17 +54,17 @@ export default {
     loaded() {
       ImagesLoaded(this.selector, () => {
         const isotope = new Isotope(this.selector, this.options);
-        function onLayout() {        
+        function onLayout() {
           TimelineMax.staggerFromTo(
             document.querySelectorAll('.isotope-item'),
             0.5,
             {
               autoAlpha: 0,
-              y: 300
+              y: 300,
             },
-             {
+            {
               autoAlpha: 1,
-              y: 0
+              y: 0,
             },
             0.2,
           );
@@ -76,7 +76,6 @@ export default {
   },
   mounted: function() {
     this.loaded();
-
   },
 };
 </script>
@@ -88,17 +87,33 @@ export default {
   @extend %overlayPosition;
 }
 .isotope-item-desc {
+  padding: 0 10%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   transform: translateY(50px);
   opacity: 0;
   transition: 300ms ease-in-out;
   h2 {
     @extend %heading;
-    font-size: 30px;
+    font-size: 46px;
     color: black;
+  }
+  p {
+    @extend %p;
+    line-height: 42px;
+    font-size: 30px;
+  }
+  @media #{$ipadLandscape} {
+    h2 {
+      font-size: 30px;
+    }
+    p {
+      line-height: 20px;
+      font-size: 18px;
+    }
   }
 }
 .isotope-item-overlay {
@@ -107,11 +122,11 @@ export default {
   transition: 300ms ease-in-out;
 }
 .isotope-wrapper {
-    margin: 0 auto;
-    max-width: 1920px;
-    width: 100%;
+  margin: 0 auto;
+  // max-width: 1920px;
+  width: 100%;
 }
-.isotope-container {  
+.isotope-container {
   .isotope-item {
     overflow: hidden;
     visibility: hidden;
@@ -124,7 +139,7 @@ export default {
       width: 50%;
     }
     a {
-      display: block;      
+      display: block;
       &:hover {
         .isotope-item-desc {
           transform: translateY(0px);
