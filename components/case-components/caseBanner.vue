@@ -3,7 +3,7 @@
         <SVG-filter-image
           :src="data.image.fields.url"
           :src-placeholder="data.image.fields.base64"
-          :blurLevel="50"
+          :srcset="data.imageSrcset.fields.images"
           :duration="300"
           :filterId="data.image.sys.id"
         ></SVG-filter-image>
@@ -11,21 +11,21 @@
     </div>
 </template>
 <script>
-import SVGFilterImage from "~/components/SVGFilterImage";
+import SVGFilterImage from '~/components/SVGFilterImage';
 export default {
   props: ['data'],
   components: {
-    SVGFilterImage
+    SVGFilterImage,
   },
 };
 </script>
-
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .banner {
   position: relative;
   overflow: hidden;
-  img {
+  img,
+  picture {
     width: 100%;
   }
 }

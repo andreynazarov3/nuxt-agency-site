@@ -6,7 +6,6 @@
           v-for="(item, index) in data.images" 
           :src="item.fields.url"
           :src-placeholder="item.fields.base64"
-          :blurLevel="5"
           :duration="300"
         ></SVG-filter-image>  
     </div>

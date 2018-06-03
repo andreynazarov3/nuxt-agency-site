@@ -4,7 +4,6 @@
           :filterId="data.image.sys.id"
           :src="data.image.fields.url"
           :src-placeholder="data.image.fields.base64"
-          :blurLevel="10"
           :duration="300"
         ></SVG-filter-image>          
     </div>

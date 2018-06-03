@@ -122,8 +122,6 @@ export default {
   transition: 300ms ease-in-out;
 }
 .isotope-wrapper {
-  margin: 0 auto;
-  // max-width: 1920px;
   width: 100%;
 }
 .isotope-container {

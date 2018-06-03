@@ -10,38 +10,49 @@
      <v-lazy-image
       :style="{filter: filterIdStyle}"
       :src="src"
+      :srcset="srcsetArray"
       :src-placeholder="srcPlaceholder"
+      :srcPlaceholderSet="srcPlaceholderSet"
       @load="animate"
     ></v-lazy-image>
   </div>
 </template>
 <script>
-import VLazyImage from "~/components/v-lazy-image";
+import VLazyImage from '~/components/v-lazy-image';
 export default {
   components: {
-    VLazyImage
+    VLazyImage,
   },
   props: {
     filterId: String,
     src: String,
+    srcset: Array,
     srcPlaceholder: String,
     blurLevel: {
       type: Number,
-      default: 30
+      default: 30,
     },
     duration: {
       type: Number,
-      default: 1000
-    }
+      default: 1000,
+    },
   },
   data: () => ({ rate: 1 }),
   computed: {
-    filterIdStyle(){
-      return `url(#${this.filterId})`
+    srcPlaceholderSet() {
+      return this.srcset ? this.srcset.map(item => item.fields.base64) : null;
+    },
+    srcsetArray() {
+      return this.srcset
+        ? this.srcset.map(item => (item.fields.urlRetina ? item.fields.urlRetina : item.fields.url))
+        : null;
+    },
+    filterIdStyle() {
+      return `url(#${this.filterId})`;
     },
     deviation() {
       return this.blurLevel * this.rate;
-    }
+    },
   },
   methods: {
     animate() {
@@ -56,8 +67,8 @@ export default {
         }
       };
       requestAnimationFrame(step);
-    }
-  }
+    },
+  },
 };
 </script>
 
