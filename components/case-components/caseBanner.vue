@@ -1,5 +1,5 @@
 <template>
-    <div class="banner">
+    <div class="banner" :class="{'banner-withpadding': data.topPadding}">
         <SVG-filter-image
           :src="src"
           :src-placeholder="srcPlaceholder"
@@ -52,6 +52,9 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
+  &-withpadding {
+    padding-top: 111px;
+  }
   img,
   picture {
     width: 100%;
