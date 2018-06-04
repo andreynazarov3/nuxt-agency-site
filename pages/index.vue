@@ -14,7 +14,12 @@ export default {
   components: {
     Welcoming,
     IsotopeGrid,
-    myHeader
+    myHeader,
+  },
+  asyncData({ isDev }) {
+    if (process.browser && isDev) {
+      window.localStorage.clear();
+    }
   },
   computed: {
     ...mapGetters({

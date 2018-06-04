@@ -7,6 +7,7 @@
 <script>
 import { EventBus } from '~/components/event-bus.js';
 import mobileMenu from '~/components/mobileMenu';
+
 export default {
   components: {
     mobileMenu,
@@ -32,7 +33,6 @@ export default {
       bodyAttrs: {
         style: this.mobileMenuOpened ? 'overflow: hidden' : '',
       },
-      
     };
   },
 };
