@@ -23,6 +23,7 @@ const VLazyImageComponent = {
     observer: null,
     intersected: false,
     loaded: false
+
   }),
   computed: {
     srcImage() {
@@ -89,13 +90,16 @@ const VLazyImageComponent = {
       });
     }
   },
-  mounted() {
-    this.$refs.image.addEventListener("load", ev => {
+  methods: {
+    onImageLoad() {
       if (this.$refs.image.getAttribute('src') === this.src) {
         this.loaded = true;
-        this.$emit("load");
+        this.$emit("load", this.$refs.image.currentSrc);
       }
-    });
+    },
+  },
+  mounted() {
+    this.$refs.image.addEventListener("load", this.onImageLoad);
     this.observer = new IntersectionObserver(entries => {
       const image = entries[0];
       if (image.isIntersecting) {
@@ -106,6 +110,9 @@ const VLazyImageComponent = {
     }, this.intersectionOptions);
 
     this.observer.observe(this.$el);
+  },
+  beforeDestroy() {
+    this.$refs.image.removeEventListener("load", this.onImageLoad);
   },
   destroyed() {
     this.observer.disconnect();

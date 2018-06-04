@@ -1,6 +1,6 @@
 <template>
   <div class="progressive-image">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter hidden">
+    <svg v-if="filterEnabled" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter hidden">
       <defs>
         <filter :id="filterId">
           <feGaussianBlur in="SourceGraphic" :stdDeviation="deviation" />
@@ -37,7 +37,7 @@ export default {
       default: 1000,
     },
   },
-  data: () => ({ rate: 1 }),
+  data: () => ({ rate: 1, storage: null, filterEnabled: true }),
   computed: {
     srcPlaceholderSet() {
       return this.srcset ? this.srcset.map(item => item.fields.base64) : null;
@@ -55,7 +55,24 @@ export default {
     },
   },
   methods: {
-    animate() {
+    logCache(source) {
+      if (this.storage.cachedElements.indexOf(source, 0) < 0) {
+        if (this.storage.cachedElements != '') this.storage.cachedElements += ';';
+        this.storage.cachedElements += source;
+      }
+    },
+    cached(source) {
+      return this.storage.cachedElements.indexOf(source, 0) >= 0;
+    },
+    animate(payload) {
+      
+      if (this.cached(payload)) {
+        this.filterEnabled = false;
+      } else {
+        this.filterEnabled = true;
+      }
+      this.logCache(payload);
+
       const start = Date.now() + this.duration;
       const step = () => {
         const remaining = start - Date.now();
@@ -67,7 +84,14 @@ export default {
         }
       };
       requestAnimationFrame(step);
+      
     },
+  },
+  mounted: function() {
+    this.storage = window.localStorage;
+    if (!this.storage.cachedElements) {
+      this.storage.cachedElements = '';
+    }
   },
 };
 </script>
