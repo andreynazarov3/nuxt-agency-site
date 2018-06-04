@@ -35,7 +35,7 @@ module.exports = {
    ** Build configuration
    */
   vendor: [
-    'axios', 'imagesloaded'
+    'axios', 'imagesloaded', 'gsap', 'isotope-layout', 'isotope-packery', 'scrollmagic',
   ],
   env: {
     CTF_SPACE_ID: config.CTF_SPACE_ID,

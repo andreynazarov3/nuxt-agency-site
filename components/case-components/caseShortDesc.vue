@@ -37,10 +37,19 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+   @media #{$ipadPortrait} {
+     padding-top: 0;
+  }
 }
 .tags {
   display: flex;
   justify-content: space-between;
+  @media #{$ipadPortrait} {
+    flex-direction: column;
+    > div {
+      padding-top: 20px;
+    }
+  }
   h2 {
     @extend %p;
     color: #C1C1C1;

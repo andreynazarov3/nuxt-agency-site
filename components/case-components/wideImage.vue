@@ -4,6 +4,7 @@
           :filterId="data.image.sys.id"
           :src="data.image.fields.url"
           :src-placeholder="data.image.fields.base64"
+          :srcset="data.imageSrcset.fields.images"
           :duration="300"
         ></SVG-filter-image>          
     </div>
@@ -21,7 +22,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .wideImage {
   padding-top: 80px;

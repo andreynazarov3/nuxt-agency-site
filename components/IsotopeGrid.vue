@@ -60,11 +60,11 @@ export default {
             0.5,
             {
               autoAlpha: 0,
-              y: 300,
+              y: '100%',
             },
             {
               autoAlpha: 1,
-              y: 0,
+              y: '0%',
             },
             0.2,
           );

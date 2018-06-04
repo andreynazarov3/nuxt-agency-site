@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .manyImages {
   padding-top: 80px;
@@ -33,12 +33,15 @@ export default {
   display:flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media #{$mobile} {
+      flex-wrap: wrap;
+      width: 100%;
+    }
   .progressive-image {
     width: 48%;
-  }
-  img {
-    width: 100%;
-    // max-width: 760px;
+    @media #{$mobile} {
+      width: 100%;
+    }
   }
 }
 </style>
