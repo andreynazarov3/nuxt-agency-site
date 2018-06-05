@@ -7,7 +7,7 @@
 import myHeader from '~/components/myHeader';
 export default {
   components: {
-     myHeader
+    myHeader,
   },
-}
+};
 </script>

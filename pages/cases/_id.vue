@@ -14,6 +14,7 @@ import manyImages from '~/components/case-components/manyImages';
 import myHeader from '~/components/myHeader';
 import myVideo from '~/components/case-components/myVideo';
 import theTeam from '~/components/case-components/theTeam';
+import flickitySlider from '~/components/case-components/flickitySlider';
 export default {
   components: {
     caseBanner,
@@ -23,7 +24,8 @@ export default {
     manyImages,
     myHeader,
     myVideo,
-    theTeam
+    theTeam,
+    flickitySlider
   },
   asyncData({ params, store, error }) {
     const item = store.getters.getCaseById(params.id);

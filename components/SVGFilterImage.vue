@@ -1,11 +1,9 @@
 <template>
   <div class="progressive-image">
-    <svg v-if="filterEnabled" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter hidden">
-      <defs>
+    <svg  width="0" height="0" v-if="filterEnabled" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter">
         <filter :id="filterId">
           <feGaussianBlur in="SourceGraphic" :stdDeviation="deviation" />
-        </filter>
-      </defs>
+        </filter> 
     </svg>
      <v-lazy-image
       :style="{filter: filterIdStyle}"
@@ -48,7 +46,7 @@ export default {
         : null;
     },
     filterIdStyle() {
-      return `url(#${this.filterId})`;
+      return this.filterEnabled ? `url(#${this.filterId})` : null;
     },
     deviation() {
       return this.blurLevel * this.rate;
@@ -65,7 +63,7 @@ export default {
       return this.storage.cachedElements.indexOf(source, 0) >= 0;
     },
     animate(payload) {
-      
+      this.$emit('animate');
       if (this.cached(payload)) {
         this.filterEnabled = false;
       } else {
@@ -84,7 +82,6 @@ export default {
         }
       };
       requestAnimationFrame(step);
-      
     },
   },
   mounted: function() {
@@ -96,7 +93,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .progressive-image {
   overflow: hidden;
 }
