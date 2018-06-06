@@ -11,7 +11,7 @@
               </div>           
               <img 
               draggable="false"  
-              :src="'/images/' + item.fields.previewImg"
+              :src="item.fields.previewImg"
               />            
             </nuxt-link>
           </div>

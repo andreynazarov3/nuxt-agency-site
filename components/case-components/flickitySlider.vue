@@ -38,6 +38,7 @@ export default {
         freeScroll: true,
         on: {
           ready: function() {
+            this.reposition()
             this.resize();
           },
         },
