@@ -7,6 +7,7 @@
             :src="image.fields.url"
             :src-placeholder="image.fields.base64"       
             :duration="300" 
+            @mounted="resize"
       ></SVG-filter-image>    
   </div>
 </template>
@@ -36,13 +37,6 @@ export default {
         contain: true,
         groupCells: 1,
         freeScroll: true,
-        imagesLoaded: true,
-        on: {
-          ready: function() {
-            this.reposition()
-            this.resize();
-          },
-        },
       });
     },
   },
