@@ -1,7 +1,7 @@
 <template>
       <div class="isotope-wrapper">
-        <div class="isotope-container">         
-          <div class="isotope-item" :key="item.sys.id" v-for="item in cases">
+        <div :class="{isVisible: isotopeVisible}" class="isotope-container">         
+          <div :class="getTagsClasses(item)" class="isotope-item" :key="item.sys.id" v-for="item in cases">
             <nuxt-link draggable="false" :to="'/cases/'+item.fields.casePageUrl">
             <div class="isotope-item-overlay">                
               </div>   
@@ -29,19 +29,22 @@ if (process.browser) {
 }
 
 export default {
-  props: ['cases'],
+  props: ['cases', 'filter'],
 
   data: function() {
     return {
+      isotopeVisible: false,
+      isotope: null,
       selector: '.isotope-container',
       options: {
         itemSelector: '.isotope-item',
-        initLayout: false,
+        initLayout: true,
         layoutMode: 'packery',
         packery: {
           gutter: 0,
         },
         percentPosition: true,
+        stagger: 30,
       },
     };
   },
@@ -49,28 +52,46 @@ export default {
     props() {
       this.loaded();
     },
+    filter: function() {
+      this.filterGridPlease();
+    },
   },
   methods: {
+    getTagsClasses: function(item) {
+      let arr = [];
+      if (item.fields.tagsWork) {
+        arr = [...arr, ...item.fields.tagsWork.fields.tags];
+      }
+      if (item.fields.tagsProject) {
+        arr = [...arr, ...item.fields.tagsProject.fields.tags];
+      }
+      if (item.fields.year) {
+        arr = [...arr, `year${item.fields.year.fields.year}`];
+      }
+      return arr;
+    },
+    filterGridPlease() {
+      this.isotope.arrange({
+        filter: this.filter,
+      });
+    },
     loaded() {
       ImagesLoaded(this.selector, () => {
-        const isotope = new Isotope(this.selector, this.options);
-        function onLayout() {
-          TimelineMax.staggerFromTo(
-            document.querySelectorAll('.isotope-item'),
-            0.5,
-            {
-              autoAlpha: 0,
-              y: '100%',
-            },
-            {
-              autoAlpha: 1,
-              y: '0%',
-            },
-            0.2,
-          );
-        }
-        isotope.on('arrangeComplete', onLayout);
-        isotope.arrange();
+        this.isotope = new Isotope(this.selector, this.options);
+        this.isotopeVisible = true;
+        TimelineMax.staggerFromTo(
+          document.querySelectorAll('.isotope-item'),
+          0.5,
+          {
+            autoAlpha: 0,
+            y: '100%',
+          },
+          {
+            autoAlpha: 1,
+            y: '0%',
+          },
+          0.2,
+        );
       });
     },
   },
@@ -125,10 +146,13 @@ export default {
   width: 100%;
 }
 .isotope-container {
+  opacity: 0;
+  transition: opacity 300ms ease;
+  &.isVisible {
+    opacity: 1;
+  }
   .isotope-item {
     overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
     width: 25%;
     @media #{$mediumLaptop} {
       width: 33.333%;

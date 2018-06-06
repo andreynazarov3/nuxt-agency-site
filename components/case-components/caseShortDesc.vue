@@ -3,15 +3,15 @@
       <div class="tags">
           <div class="tags-work-type">
             <h2>Тип работ:</h2>
-            <span :key="index" v-for="(item, index) in data.tags_worktype">#{{item}}</span>
+            <span :key="index" v-for="(item, index) in data.tagsWork.fields.tags">#{{item}}</span>
         </div>
         <div class="tags-project-type">
           <h2>Тип проекта:</h2>
-          <span :key="index" v-for="(item, index) in data.tags_projecttype">#{{item}}</span>
+          <span :key="index" v-for="(item, index) in data.tagsProject.fields.tags">#{{item}}</span>
         </div>
         <div class="year">
           <h2>Год:</h2>
-          <span>{{data.year}}</span>
+          <span>{{data.year.fields.year}}</span>
         </div>
       </div>
       <div class="undertext">

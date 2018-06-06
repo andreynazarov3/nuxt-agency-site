@@ -62,8 +62,7 @@ export default {
     cached(source) {
       return this.storage.cachedElements.indexOf(source, 0) >= 0;
     },
-    animate(payload) {
-      this.$emit('animate');
+    animate(payload) {      
       if (this.cached(payload)) {
         this.filterEnabled = false;
       } else {
@@ -85,6 +84,7 @@ export default {
     },
   },
   mounted: function() {
+    this.$emit('mounted');
     this.storage = window.localStorage;
     if (!this.storage.cachedElements) {
       this.storage.cachedElements = '';

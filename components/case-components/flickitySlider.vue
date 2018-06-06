@@ -6,9 +6,8 @@
             :filterId="image.sys.id"
             :src="image.fields.url"
             :src-placeholder="image.fields.base64"       
-            :duration="300"            
-      ></SVG-filter-image>  
-      <!-- <img v-for="(image, index) in data.images" :src="image.fields.url" :key="index"> -->
+            :duration="300" 
+      ></SVG-filter-image>    
   </div>
 </template>
 <script>
@@ -25,15 +24,23 @@ export default {
     return { flkty: null };
   },
   methods: {
+    update: function() {
+      console.log('animate');
+    },
     resize: function() {
       this.flkty.resize();
     },
     init: function() {
+      let self = this;
       this.flkty = new Flickity(this.$refs.flickity, {
-        imagesLoaded: true,
         contain: true,
         groupCells: 1,
-        freeScroll: true
+        freeScroll: true,
+        on: {
+          ready: function() {
+            this.resize();
+          },
+        },
       });
     },
   },
@@ -44,7 +51,6 @@ export default {
   },
   mounted: function() {
     this.init();
-    this.resize();
   },
 };
 </script>

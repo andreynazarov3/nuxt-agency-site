@@ -8,16 +8,48 @@ import axios from 'axios';
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      cases: []
+      cases: [],
+      tagsWork: new Set(),
+      tagsProject: new Set(),
+      allTags: new Set(),
+      years: new Set()
     },
     mutations: {
       setCases(state, cases) {
-        state.cases = cases.items
+        state.cases = cases.items;
+        // fill tags and years
+        cases.items.forEach(({
+          fields
+        }) => {
+          if (fields && fields.year) {
+            state.years.add(fields.year.fields.year);
+          }
+          if (fields && fields.tagsWork) {
+            fields.tagsWork.fields.tags.forEach((tag) => {
+              state.tagsWork.add(tag)
+              state.allTags.add(tag)
+            });
+          }
+          if (fields && fields.tagsProject) {
+            fields.tagsProject.fields.tags.forEach((tag) => {
+              state.tagsProject.add(tag)
+              state.allTags.add(tag)
+            });
+          }
+        });
       }
     },
     getters: {
       getCases(state) {
         return state.cases
+      },
+      getTagsAndYears(state) {
+        return {
+          tagsWork: Array.from(state.tagsWork),
+          tagsProject: Array.from(state.tagsProject),
+          years: Array.from(state.tagsWork),
+          allTags: Array.from(state.allTags)
+        }
       },
       getCaseById(state) {
         return (id) => {
@@ -33,7 +65,7 @@ const createStore = () => {
         commit
       }) {
         return Promise.all([
-          client.getEntries({
+            client.getEntries({
               include: 10,
               content_type: 'case',
               order: '-sys.updatedAt',
