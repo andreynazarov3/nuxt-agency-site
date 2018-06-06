@@ -36,6 +36,7 @@ export default {
         contain: true,
         groupCells: 1,
         freeScroll: true,
+        imagesLoaded: true,
         on: {
           ready: function() {
             this.reposition()
