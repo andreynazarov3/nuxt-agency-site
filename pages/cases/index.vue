@@ -10,7 +10,7 @@
         :searchable="false"
         :close-on-select="true" 
       >
-      <span slot="placeholder">Фильтрование по тэгам</span>
+      <span class="filter-placeholder" slot="placeholder">Фильтрование по тэгам</span>
       </multiselect>
   </div> 
   <IsotopeGrid :cases="cases" :filter="filter" />
@@ -64,6 +64,9 @@ export default {
 .filters {
   padding: 0 $generalPadding;
   margin: 20px 0;
+}
+.filter-placeholder {
+  @extend %p;
 }
 fieldset[disabled] .multiselect {
   pointer-events: none;
@@ -358,6 +361,7 @@ fieldset[disabled] .multiselect {
   padding-right: 12px;
   padding-left: 20px;
   font-size: 13px;
+  display: none;
 }
 .multiselect__option--highlight {
   background: #41b883;
