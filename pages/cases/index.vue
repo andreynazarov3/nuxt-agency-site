@@ -2,7 +2,7 @@
 <div class="cases">
   <myHeader />
 
-  <div class="filters">
+  <div class="filters filters-mobile">
       <multiselect 
         v-model="selectedTags" 
         :options="tagsAndYears.allTags"
@@ -11,8 +11,15 @@
         :close-on-select="true" 
       >
       <span class="filter-placeholder" slot="placeholder">Фильтрование по тэгам</span>
-      </multiselect>
+      </multiselect>            
   </div> 
+  <div class="filters filters-desktop">
+    <ul>
+      <li @click="toggleSelectTag(tag)" :class="{isSelected: isSelected(tag)}" class="filters-desktop-tag" v-for="(tag, index) in tagsAndYears.allTags" :key="index">
+          {{tag}}
+      </li>
+    </ul>
+  </div>
   <IsotopeGrid :cases="cases" :filter="filter" />
 </div>
 </template>
@@ -61,6 +68,45 @@ export default {
 </script>
 <style lang="scss">
 @import '~/assets/scss/_vars.scss';
+%tag {
+  position: relative;
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  color: #536171;
+  padding: 0px 0px 0 20px;
+  border-radius: 2px;
+  font-size: 20px;
+  line-height: 40px;
+  background: #eef2f4;
+}
+.filters-mobile {
+  display: block;
+  @media (min-width:481px) {
+    display: none;
+  }
+}
+.filters-desktop {
+  @media #{$mobile} {
+    display: none;
+  }
+}
+.filters-desktop-tag {
+  @extend %p;
+  @extend %tag;
+  padding: 0px 20px 0 20px;
+  cursor: pointer;
+  user-select: none;
+  &.isSelected {
+    background: black;
+    color: white;
+  }
+}
 .filters {
   padding: 0 $generalPadding;
   margin: 20px 0;
@@ -211,21 +257,7 @@ fieldset[disabled] .multiselect {
   font-size: 14px;
 }
 .multiselect__tag {
-  position: relative;
-  display: inline-block;
-  border-radius: 5px;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-  text-overflow: ellipsis;
-  color: #536171;
-  padding: 0px 0px 0 20px;
-  border-radius: 2px;
-  font-size: 20px;
-  line-height: 40px;
-  background: #eef2f4;
+  @extend %tag;
 }
 .multiselect__tag-icon {
   cursor: pointer;
