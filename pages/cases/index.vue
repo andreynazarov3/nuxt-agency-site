@@ -9,6 +9,7 @@
         :multiple="true"
         :searchable="false"
         :close-on-select="true" 
+        :hideSelected="true"
       >
       <span class="filter-placeholder" slot="placeholder">Фильтрование по тэгам</span>
       </multiselect>            
