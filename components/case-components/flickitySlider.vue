@@ -6,8 +6,7 @@
             :filterId="image.sys.id"
             :src="image.fields.url"
             :src-placeholder="image.fields.base64"       
-            :duration="300" 
-            @mounted="resize"
+            :duration="300"
       ></SVG-filter-image>    
   </div>
 </template>
@@ -15,6 +14,7 @@
 import SVGFilterImage from '~/components/SVGFilterImage';
 if (process.browser) {
   var Flickity = require('flickity');
+  var ImagesLoaded = require('imagesloaded');
 }
 export default {
   components: {
@@ -25,18 +25,17 @@ export default {
     return { flkty: null };
   },
   methods: {
-    update: function() {
-      console.log('animate');
-    },
     resize: function() {
       this.flkty.resize();
     },
     init: function() {
-      let self = this;
-      this.flkty = new Flickity(this.$refs.flickity, {
-        contain: true,
-        groupCells: 1,
-        freeScroll: true,
+      ImagesLoaded(this.$refs.flickity, () => {
+        let self = this;
+        this.flkty = new Flickity(this.$refs.flickity, {
+          contain: true,
+          groupCells: 1,
+          freeScroll: true,
+        });
       });
     },
   },
