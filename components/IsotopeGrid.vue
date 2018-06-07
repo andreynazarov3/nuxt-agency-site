@@ -1,7 +1,7 @@
 <template>
       <div class="isotope-wrapper">
         <div :class="{isVisible: isotopeVisible}" class="isotope-container">         
-          <div :class="getTagsClasses(item)" class="isotope-item" :key="item.sys.id" v-for="item in cases">
+          <div :class="getClasses(item)" class="isotope-item" :key="item.sys.id" v-for="item in cases">
             <nuxt-link draggable="false" :to="'/cases/'+item.fields.casePageUrl">
             <div class="isotope-item-overlay">                
               </div>   
@@ -9,9 +9,15 @@
                 <h2>{{ item.fields.title }}</h2>
                 <p>{{ item.fields.shortDesc }}</p>
               </div>           
-              <img 
-              draggable="false"  
-              :src="item.fields.previewImg"
+              <SVG-filter-image v-if="item.fields.previewPic"
+                  :src="item.fields.previewPic.fields.url"
+                  :src-placeholder="item.fields.previewPic.fields.base64"                   
+                  :duration="300"
+                  :filterId="item.fields.previewPic.sys.id">
+              </SVG-filter-image>
+              <img v-else
+                  draggable="false"  
+                  :src="item.fields.previewImg"
               />            
             </nuxt-link>
           </div>
@@ -21,7 +27,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import TimelineMax from 'gsap';
-
+import SVGFilterImage from '~/components/SVGFilterImage';
 if (process.browser) {
   var Isotope = require('isotope-layout');
   require('isotope-packery');
@@ -30,7 +36,9 @@ if (process.browser) {
 
 export default {
   props: ['cases', 'filter'],
-
+  components: {
+    SVGFilterImage,
+  },
   data: function() {
     return {
       isotopeVisible: false,
@@ -57,7 +65,7 @@ export default {
     },
   },
   methods: {
-    getTagsClasses: function(item) {
+    getClasses: function(item) {
       let arr = [];
       if (item.fields.tagsWork) {
         arr = [...arr, ...item.fields.tagsWork.fields.tags];
@@ -67,6 +75,9 @@ export default {
       }
       if (item.fields.year) {
         arr = [...arr, `year${item.fields.year.fields.year}`];
+      }
+      if (item.fields.previewPic) {
+        arr = [...arr, `isotope-item--${item.fields.previewPic.fields.size}`];
       }
       return arr;
     },
@@ -101,7 +112,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .isotope-item-desc,
 .isotope-item-overlay {
@@ -117,6 +128,7 @@ export default {
   transform: translateY(50px);
   opacity: 0;
   transition: 300ms ease-in-out;
+  z-index: 1;
   h2 {
     @extend %heading;
     font-size: 46px;
@@ -141,6 +153,7 @@ export default {
   background: white;
   opacity: 0;
   transition: 300ms ease-in-out;
+  z-index: 1;
 }
 .isotope-wrapper {
   width: 100%;
@@ -153,12 +166,57 @@ export default {
   }
   .isotope-item {
     overflow: hidden;
-    width: 25%;
+    width: 20%;
+    &--one-fifth {
+      width: 20%;
+    }
+    &--two-fifth {
+      width: 40%;
+    }
+    &--three-fifth {
+      width: 60%;
+    }
+    &--four-fifth {
+      width: 75%;
+    }
+    &--full {
+      width: 100%;
+    }
     @media #{$mediumLaptop} {
-      width: 33.333%;
+      width: 20%;
+      &--one-fifth {
+        width: 20%;
+      }
+      &--two-fifth {
+        width: 40%;
+      }
+      &--three-fifth {
+        width: 60%;
+      }
+      &--four-fifth {
+        width: 75%;
+      }
+      &--full {
+        width: 100%;
+      }
     }
     @media #{$mobile} {
       width: 50%;
+      &--one-fifth {
+        width: 50%;
+      }
+      &--two-fifth {
+        width: 100%;
+      }
+      &--three-fifth {
+        width: 100%;
+      }
+      &--four-fifth {
+        width: 100%;
+      }
+      &--full {
+        width: 100%;
+      }
     }
     a {
       display: block;

@@ -1,6 +1,6 @@
 <template>
     <div class="myVideo">
-        <video @mouseover="showControls" :src="data.src" controls controlsList="nodownload" muted></video>
+        <video :src="data.src" controls controlsList="nodownload" muted></video>
     </div>
 </template>
 <script>

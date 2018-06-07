@@ -1,41 +1,47 @@
 <template>
-  <div class="banner" :class="{'banner-withpadding': data.topPadding}">
+  <div class="banner" :class="{'banner-withpadding': mergedData.topPadding}">
     <SVG-filter-image 
-      :src="data.image.fields.url"
-      :src-placeholder="data.image.fields.base64" 
-      :srcset="data.imageSrcset.fields.images" 
+      :src="mergedData.image.fields.url"
+      :src-placeholder="mergedData.image.fields.base64" 
+      :srcset="mergedData.imageSrcset.fields.images" 
       :duration="300"
-      :filterId="data.image.sys.id">
+      :filterId="mergedData.image.sys.id">
     </SVG-filter-image>
-    <div :style="{color: data.textColor}" class="banner-text">{{data.text}}</div>
+    <div :style="{color: mergedData.textColor}" class="banner-text">{{mergedData.text}}</div>
   </div>
 </template>
 
 <script>
 import SVGFilterImage from '~/components/SVGFilterImage';
 export default {
-  props: {
-    data: {
-      type: Object,
-      default: function() {
-        return {
-          image: {
-            fields: {
-              url: null,
-              base64: null,
-            },
+  props: ['data'],
+  data() {
+    return {
+      defaultData: {
+        image: {
+          fields: {
+            url: null,
+            base64: null,
           },
-          imageSrcset: {
-            fields: {
-              images: null,
-            },
+        },
+        imageSrcset: {
+          fields: {
+            images: null,
           },
-          textColor: 'black',
-          text: null,
-          topPadding: false,
-        };
+        },
+        textColor: 'black',
+        text: null,
+        topPadding: false,
       },
-    },
+    };
+  },
+   computed: {
+    mergedData(){
+      return {
+       ...this.defaultData,
+       ...this.data
+      }
+    }
   },
   components: {
     SVGFilterImage,
