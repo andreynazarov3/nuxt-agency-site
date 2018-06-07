@@ -1,17 +1,18 @@
 <template>
-    <div class="theTeam" :style="{backgroundColor: this.data.bgColor, color: this.data.textColor}">
-      <div class="team-items">
+  <div class="theTeam" :style="{backgroundColor: this.data.bgColor, color: this.data.textColor}">
+    <div class="team-items">
       <div class="team-item" v-for="(list, index) in data.lists" :key="index">
         <h2>{{ list.fields.heading }}</h2>
         <ul>
           <li :key="index" v-for="(item, index) in list.fields.list">
             {{ item.fields.text }}
-            </li>
+          </li>
         </ul>
       </div>
-      </div>
     </div>
+  </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -28,6 +29,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .theTeam {
@@ -38,6 +40,7 @@ export default {
     padding: 30px $generalPadding;
   }
 }
+
 .team-items {
   display: flex;
   justify-content: space-between;

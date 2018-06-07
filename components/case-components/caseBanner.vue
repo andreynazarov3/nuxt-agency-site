@@ -1,15 +1,16 @@
 <template>
-    <div class="banner" :class="{'banner-withpadding': data.topPadding}">
-        <SVG-filter-image
-          :src="data.image.fields.url"
-          :src-placeholder="data.image.fields.base64"
-          :srcset="data.imageSrcset.fields.images"
-          :duration="300"
-          :filterId="data.image.sys.id"
-        ></SVG-filter-image>
-        <div :style="{color: data.textColor}" class="banner-text">{{data.text}}</div>
-    </div>
+  <div class="banner" :class="{'banner-withpadding': data.topPadding}">
+    <SVG-filter-image 
+      :src="data.image.fields.url"
+      :src-placeholder="data.image.fields.base64" 
+      :srcset="data.imageSrcset.fields.images" 
+      :duration="300"
+      :filterId="data.image.sys.id">
+    </SVG-filter-image>
+    <div :style="{color: data.textColor}" class="banner-text">{{data.text}}</div>
+  </div>
 </template>
+
 <script>
 import SVGFilterImage from '~/components/SVGFilterImage';
 export default {
@@ -21,7 +22,7 @@ export default {
           image: {
             fields: {
               url: null,
-              base64: null
+              base64: null,
             },
           },
           imageSrcset: {
@@ -31,7 +32,7 @@ export default {
           },
           textColor: 'black',
           text: null,
-          topPadding: false
+          topPadding: false,
         };
       },
     },
@@ -41,6 +42,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .banner {
@@ -54,6 +56,7 @@ export default {
     width: 100%;
   }
 }
+
 .banner-text {
   @extend %heading;
   @extend %absolutelyCentered;
