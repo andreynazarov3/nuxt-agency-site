@@ -2,6 +2,7 @@
   <div class="case">
     <myHeader :color="caseItem.fields.headerColor" />
     <component v-for="item in caseItem.fields.components" :is="item.sys.contentType.sys.id" :key="item.sys.id" :data="item.fields"></component>
+    <casesBottomNav :nextCase="nextCase" :prevCase="prevCase"></casesBottomNav>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import myHeader from '~/components/myHeader';
 import myVideo from '~/components/case-components/myVideo';
 import theTeam from '~/components/case-components/theTeam';
 import flickitySlider from '~/components/case-components/flickitySlider';
+import casesBottomNav from '~/components/casesBottomNav';
 export default {
   components: {
     caseBanner,
@@ -25,11 +27,18 @@ export default {
     myHeader,
     myVideo,
     theTeam,
-    flickitySlider
+    flickitySlider,
+    casesBottomNav
   },
   asyncData({ params, store, error }) {
-    const item = store.getters.getCaseById(params.id);
-    return { caseItem: item };
+    const caseItem = store.getters.getCaseById(params.id);
+    const nextCase = store.getters.getNextCaseById(params.id);
+    const prevCase = store.getters.getPrevCaseById(params.id);
+    return {
+      caseItem,
+      nextCase,
+      prevCase
+    };
   },
 };
 </script>

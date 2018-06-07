@@ -56,6 +56,26 @@ const createStore = () => {
           return state.cases.find(item => item.fields.casePageUrl === id);
         }
       },
+      getNextCaseById(state) {
+        return (id) => {          
+          const index = state.cases.findIndex(item => item.fields.casePageUrl === id);
+          if (index === state.cases.length - 1) {
+            return state.cases[0];
+          } else {
+            return state.cases[index + 1];
+          }
+        }
+      },
+      getPrevCaseById(state) {
+        return (id) => {          
+          const index = state.cases.findIndex(item => item.fields.casePageUrl === id);
+          if (index === 0) {
+            return state.cases[state.cases.length - 1];
+          } else {
+            return state.cases[index - 1];
+          }
+        }
+      },
       getCasesForMainPage(state) {
         return state.cases.filter(item => item.fields.showOnMainPage === true);
       },
