@@ -8,6 +8,7 @@
           :duration="300"
           :filterId="prevCaseMerged.image.sys.id">
        </SVG-filter-image>
+       <span>Предыдущий кейс</span>
         </nuxt-link>
 
       <nuxt-link :to="nextCase.fields.casePageUrl">
@@ -18,9 +19,8 @@
           :duration="300"
           :filterId="nextCaseMerged.image.sys.id">
        </SVG-filter-image>
+       <span>Следущий кейс</span>
         </nuxt-link>
-
-      
   </div>
 </template>
 <script>
@@ -87,13 +87,22 @@ export default {
   display: flex;
   a {
     display: block;
+    position: relative;
     width: 50%;
+    padding-bottom: 20%;
+    @media #{$mobile} {
+      padding-bottom: 50%;
+    }
+    span {
+      @extend %absolutelyCentered;
+      @extend %p;
+    }
   }
   picture {
     display: block;
   }
   .progressive-image {
-    width: 100%;
+    @extend %overlayPosition;
   }
   img {
     width: 100%;
