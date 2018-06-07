@@ -16,9 +16,6 @@ export default {
   components: {
     SVGFilterImage
   },
-  data: function() {
-    return {  }
-}
 };
 </script>
 

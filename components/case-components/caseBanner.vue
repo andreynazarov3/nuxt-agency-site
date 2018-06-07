@@ -1,9 +1,9 @@
 <template>
     <div class="banner" :class="{'banner-withpadding': data.topPadding}">
         <SVG-filter-image
-          :src="src"
-          :src-placeholder="srcPlaceholder"
-          :srcset="srcset"
+          :src="data.image.fields.url"
+          :src-placeholder="data.image.fields.base64"
+          :srcset="data.imageSrcset.fields.images"
           :duration="300"
           :filterId="data.image.sys.id"
         ></SVG-filter-image>
@@ -13,33 +13,27 @@
 <script>
 import SVGFilterImage from '~/components/SVGFilterImage';
 export default {
-  props: ['data'],
-  computed: {
-    src: function() {
-      if (this.data && this.data.image && this.data.image.fields && this.data.image.fields.url) {
-        return this.data.image.fields.url;
-      } else {
-        return null;
-      }
-    },
-    srcPlaceholder: function() {
-      if (this.data && this.data.image && this.data.image.fields && this.data.image.fields.base64) {
-        return this.data.image.fields.base64;
-      } else {
-        return null;
-      }
-    },
-    srcset: function() {
-      if (
-        this.data &&
-        this.data.imageSrcset &&
-        this.data.imageSrcset.fields &&
-        this.data.imageSrcset.fields.images
-      ) {
-        return this.data.imageSrcset.fields.images;
-      } else {
-        return null;
-      }
+  props: {
+    data: {
+      type: Object,
+      default: function() {
+        return {
+          image: {
+            fields: {
+              url: null,
+              base64: null
+            },
+          },
+          imageSrcset: {
+            fields: {
+              images: null,
+            },
+          },
+          textColor: 'black',
+          text: null,
+          topPadding: false
+        };
+      },
     },
   },
   components: {

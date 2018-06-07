@@ -1,10 +1,12 @@
 <template>
-    <div class="theTeam">
+    <div class="theTeam" :style="{backgroundColor: this.data.bgColor, color: this.data.textColor}">
       <div class="team-items">
-      <div class="team-item" v-for="(i, index) in [1,1,1]" :key="index">
-        <h2>{{ data.heading1 }}</h2>
+      <div class="team-item" v-for="(list, index) in data.lists" :key="index">
+        <h2>{{ list.fields.heading }}</h2>
         <ul>
-          <li :key="index" v-for="(item, index) in data.list1">{{ item }}</li>
+          <li :key="index" v-for="(item, index) in list.fields.list">
+            {{ item.fields.text }}
+            </li>
         </ul>
       </div>
       </div>
@@ -12,7 +14,18 @@
 </template>
 <script>
 export default {
-  props: ['data'],
+  props: {
+    data: {
+      type: Object,
+      default: function() {
+        return {
+          lists: [],
+          bgColor: '#f3f3f3',
+          textColor: 'black',
+        };
+      },
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -22,7 +35,7 @@ export default {
   padding: 130px $generalPadding;
   background: #f3f3f3;
   @media #{$ipadLandscape} {
-    padding: 30px $generalPadding; 
+    padding: 30px $generalPadding;
   }
 }
 .team-items {
@@ -41,9 +54,9 @@ export default {
     line-height: 28px;
   }
   @media #{$ipadLandscape} {
-    flex-direction: column;    
+    flex-direction: column;
     .team-item {
-      padding: 30px 0; 
+      padding: 30px 0;
     }
   }
 }
