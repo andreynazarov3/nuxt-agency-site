@@ -1,6 +1,6 @@
 <template>
   <div class="progressive-image">
-    <svg  width="0" height="0" v-if="filterEnabled" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter">
+    <svg  width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" class="filter">
         <filter :id="filterId">
           <feGaussianBlur in="SourceGraphic" :stdDeviation="deviation" />
         </filter> 
@@ -28,7 +28,7 @@ export default {
     srcPlaceholder: String,
     blurLevel: {
       type: Number,
-      default: 30,
+      default: 5,
     },
     duration: {
       type: Number,

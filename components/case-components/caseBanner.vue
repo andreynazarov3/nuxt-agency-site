@@ -4,7 +4,6 @@
       :src="mergedData.image.fields.url"
       :src-placeholder="mergedData.image.fields.base64" 
       :srcset="mergedData.imageSrcset.fields.images" 
-      :duration="300"
       :filterId="mergedData.image.sys.id">
     </SVG-filter-image>
     <div :style="{color: mergedData.textColor}" class="banner-text">{{mergedData.text}}</div>

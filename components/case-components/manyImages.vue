@@ -5,8 +5,7 @@
           :key="index" 
           v-for="(item, index) in data.images" 
           :src="item.fields.url"
-          :src-placeholder="item.fields.base64"
-          :duration="300"
+          :src-placeholder="item.fields.base64"       
         ></SVG-filter-image>  
     </div>
 </template>

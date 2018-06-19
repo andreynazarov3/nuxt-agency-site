@@ -4,8 +4,7 @@
           :filterId="data.image.sys.id"
           :src="data.image.fields.url"
           :src-placeholder="data.image.fields.base64"
-          :srcset="data.imageSrcset.fields.images"
-          :duration="300"
+          :srcset="data.imageSrcset.fields.images"     
         ></SVG-filter-image>          
     </div>
 </template>

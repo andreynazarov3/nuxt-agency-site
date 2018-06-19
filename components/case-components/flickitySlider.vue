@@ -5,8 +5,7 @@
             :key="index"
             :filterId="image.sys.id"
             :src="image.fields.url"
-            :src-placeholder="image.fields.base64"       
-            :duration="300"
+            :src-placeholder="image.fields.base64"               
       ></SVG-filter-image>    
   </div>
 </template>

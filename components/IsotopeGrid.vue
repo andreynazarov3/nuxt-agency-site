@@ -11,8 +11,7 @@
               </div>           
               <SVG-filter-image v-if="item.fields.previewPic"
                   :src="item.fields.previewPic.fields.url"
-                  :src-placeholder="item.fields.previewPic.fields.base64"                   
-                  :duration="300"
+                  :src-placeholder="item.fields.previewPic.fields.base64"                                   
                   :filterId="item.fields.previewPic.sys.id">
               </SVG-filter-image>
               <img v-else

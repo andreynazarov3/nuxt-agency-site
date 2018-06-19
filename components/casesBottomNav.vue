@@ -4,8 +4,7 @@
          <SVG-filter-image v-if="prevCaseMerged.image.sys"
           :src="prevCaseMerged.image.fields.url"
           :src-placeholder="prevCaseMerged.image.fields.base64" 
-          :srcset="prevCaseMerged.imageSrcset.fields.images" 
-          :duration="300"
+          :srcset="prevCaseMerged.imageSrcset.fields.images"       
           :filterId="prevCaseMerged.image.sys.id">
        </SVG-filter-image>
        <span>Предыдущий кейс</span>
@@ -15,8 +14,7 @@
         <SVG-filter-image v-if="nextCaseMerged.image.sys"
           :src="nextCaseMerged.image.fields.url"
           :src-placeholder="nextCaseMerged.image.fields.base64" 
-          :srcset="nextCaseMerged.imageSrcset.fields.images" 
-          :duration="300"
+          :srcset="nextCaseMerged.imageSrcset.fields.images"         
           :filterId="nextCaseMerged.image.sys.id">
        </SVG-filter-image>
        <span>Следущий кейс</span>
