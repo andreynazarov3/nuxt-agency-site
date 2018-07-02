@@ -1,33 +1,21 @@
 <template>
   <div class="banner" :class="{'banner-withpadding': mergedData.topPadding}">
-    <SVG-filter-image 
-      :src="mergedData.image.fields.url"
-      :src-placeholder="mergedData.image.fields.base64" 
-      :srcset="mergedData.imageSrcset.fields.images" 
-      :filterId="mergedData.image.sys.id">
-    </SVG-filter-image>
+    <LazyPicture 
+      :title="mergedData.image.fields.title"
+      :sources="mergedData.image.fields.sources"
+    >
+    </LazyPicture>
     <div :style="{color: mergedData.textColor}" class="banner-text">{{mergedData.text}}</div>
   </div>
 </template>
 
 <script>
-import SVGFilterImage from '~/components/SVGFilterImage';
+import LazyPicture from '~/components/LazyPicture';
 export default {
   props: ['data'],
   data() {
     return {
-      defaultData: {
-        image: {
-          fields: {
-            url: null,
-            base64: null,
-          },
-        },
-        imageSrcset: {
-          fields: {
-            images: null,
-          },
-        },
+      defaultData: {     
         textColor: 'black',
         text: null,
         topPadding: false,
@@ -43,7 +31,7 @@ export default {
     }
   },
   components: {
-    SVGFilterImage,
+    LazyPicture
   },
 };
 </script>
@@ -53,12 +41,9 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
+  max-height: 600px;
   &-withpadding {
     padding-top: 111px;
-  }
-  img,
-  picture {
-    width: 100%;
   }
 }
 

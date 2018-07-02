@@ -1,5 +1,8 @@
 const VLazyImageComponent = {
   props: {
+    usePictureTag: {
+      type: Boolean      
+    },
     src: {
       type: String,
       required: true
@@ -23,7 +26,6 @@ const VLazyImageComponent = {
     observer: null,
     intersected: false,
     loaded: false
-
   }),
   computed: {
     srcImage() {

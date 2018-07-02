@@ -1,52 +1,45 @@
 <template>
       <div class="isotope-wrapper">
         <div :class="{isVisible: isotopeVisible}" class="isotope-container">         
-          <div :class="getClasses(item)" class="isotope-item" :key="item.sys.id" v-for="item in cases">
+          <div ref="isotope-items" class="isotope-item" :key="item.sys.id" v-for="item in cases">
             <nuxt-link draggable="false" :to="'/cases/'+item.fields.casePageUrl">
             <div class="isotope-item-overlay">                
               </div>   
               <div class="isotope-item-desc">
                 <h2>{{ item.fields.title }}</h2>
                 <p>{{ item.fields.shortDesc }}</p>
-              </div>           
-              <SVG-filter-image v-if="item.fields.previewPic"
-                  :src="item.fields.previewPic.fields.url"
-                  :src-placeholder="item.fields.previewPic.fields.base64"                                   
-                  :filterId="item.fields.previewPic.sys.id">
-              </SVG-filter-image>
-              <img v-else
-                  draggable="false"  
-                  :src="item.fields.previewImg"
-              />            
+              </div>            
+              <LazyPicture v-if="item.fields.previewPic"
+                  :title="item.fields.previewPic.fields.title"
+                  :sources="item.fields.previewPic.fields.sources"
+              ></LazyPicture>                   
             </nuxt-link>
           </div>
         </div>
     </div>
 </template> 
 <script>
-import { mapGetters } from 'vuex';
-import TimelineMax from 'gsap';
-import SVGFilterImage from '~/components/SVGFilterImage';
+import { mapGetters } from "vuex";
+import LazyPicture from "~/components/LazyPicture";
 if (process.browser) {
-  var Isotope = require('isotope-layout');
-  require('isotope-packery');
-  var ImagesLoaded = require('imagesloaded');
+  var Isotope = require("isotope-layout");
+  require("isotope-packery");
+  var ImagesLoaded = require("imagesloaded");
 }
-
 export default {
-  props: ['cases', 'filter'],
+  props: ["cases", "filter"],
   components: {
-    SVGFilterImage,
+    LazyPicture,
   },
   data: function() {
     return {
       isotopeVisible: false,
       isotope: null,
-      selector: '.isotope-container',
+      selector: ".isotope-container",
       options: {
-        itemSelector: '.isotope-item',
+        itemSelector: ".isotope-item",
         initLayout: true,
-        layoutMode: 'packery',
+        layoutMode: "packery",
         packery: {
           gutter: 0,
         },
@@ -89,16 +82,16 @@ export default {
       ImagesLoaded(this.selector, () => {
         this.isotope = new Isotope(this.selector, this.options);
         this.isotopeVisible = true;
-        TimelineMax.staggerFromTo(
-          document.querySelectorAll('.isotope-item'),
+        new TimelineMax().staggerFromTo(
+          this.$refs["isotope-items"],
           0.5,
           {
             autoAlpha: 0,
-            y: '100%',
+            y: "100%",
           },
           {
             autoAlpha: 1,
-            y: '0%',
+            y: "0%",
           },
           0.2,
         );
@@ -112,7 +105,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/_vars.scss';
+@import "~/assets/scss/_vars.scss";
 .isotope-item-desc,
 .isotope-item-overlay {
   @extend %overlayPosition;
@@ -166,56 +159,11 @@ export default {
   .isotope-item {
     overflow: hidden;
     width: 20%;
-    &--one-fifth {
-      width: 20%;
-    }
-    &--two-fifth {
-      width: 40%;
-    }
-    &--three-fifth {
-      width: 60%;
-    }
-    &--four-fifth {
-      width: 75%;
-    }
-    &--full {
-      width: 100%;
-    }
     @media #{$mediumLaptop} {
-      width: 20%;
-      &--one-fifth {
-        width: 20%;
-      }
-      &--two-fifth {
-        width: 40%;
-      }
-      &--three-fifth {
-        width: 60%;
-      }
-      &--four-fifth {
-        width: 75%;
-      }
-      &--full {
-        width: 100%;
-      }
+      width: 33.3333%;
     }
     @media #{$mobile} {
       width: 50%;
-      &--one-fifth {
-        width: 50%;
-      }
-      &--two-fifth {
-        width: 100%;
-      }
-      &--three-fifth {
-        width: 100%;
-      }
-      &--four-fifth {
-        width: 100%;
-      }
-      &--full {
-        width: 100%;
-      }
     }
     a {
       display: block;

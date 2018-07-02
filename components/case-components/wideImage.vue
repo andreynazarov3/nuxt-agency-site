@@ -1,19 +1,18 @@
 <template>
     <div class="wideImage">
-        <SVG-filter-image
-          :filterId="data.image.sys.id"
-          :src="data.image.fields.url"
-          :src-placeholder="data.image.fields.base64"
-          :srcset="data.imageSrcset.fields.images"     
-        ></SVG-filter-image>          
+      <LazyPicture 
+        :title="data.image.fields.title"
+        :sources="data.image.fields.sources"
+      >
+      </LazyPicture>
     </div>
 </template>
 <script>
-import SVGFilterImage from "~/components/SVGFilterImage";
+import LazyPicture from '~/components/LazyPicture';
 export default {
   props: ['data'],
   components: {
-    SVGFilterImage
+    LazyPicture
   },
 };
 </script>
@@ -23,9 +22,7 @@ export default {
 .wideImage {
   padding-top: 80px;
   max-width: 1565px;
+  width: 100%;
   margin: 0 auto;
-  img {
-    width: 100%;
-  }
 }
 </style>

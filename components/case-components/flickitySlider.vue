@@ -1,12 +1,6 @@
 <template>
   <div ref="flickity" class="flickity-wrapper">
-      <SVG-filter-image
-            v-for="(image, index) in data.images"
-            :key="index"
-            :filterId="image.sys.id"
-            :src="image.fields.url"
-            :src-placeholder="image.fields.base64"               
-      ></SVG-filter-image>    
+
   </div>
 </template>
 <script>
@@ -92,7 +86,7 @@ https://flickity.metafizzy.co
 
 .flickity-enabled.is-draggable {
   -webkit-tap-highlight-color: transparent;
-  tap-highlight-color: transparent;
+  // tap-highlight-color: transparent;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

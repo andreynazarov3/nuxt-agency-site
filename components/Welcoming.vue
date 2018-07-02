@@ -1,6 +1,6 @@
 <template>
   <div class="welcoming">
-     <div class="welcoming-heading"><h1>Привет, мы </h1><div class="logo-wrapper"><Logo :width="'100%'" :height="'100%'" /></div></div>
+     <h1>Привет, мы DOBRO</h1>
      <p>Мы создаем и развиваем отличные digital продукты для рекламных агентств, брендов и веб-проектов</p>
    </div>
 </template>
@@ -16,19 +16,10 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/scss/_vars.scss';
 .welcoming {
-  max-width: 950px;
+  max-width: 1050px;
   align-self: center;
   padding: 100px $headerGutter 200px;
   box-sizing: border-box;
-  &-heading {
-    display:flex;
-    display: flex;
-    align-items: center;
-    padding-bottom: 30px;
-  }
-  .logo-wrapper {
-      margin-left: 20px;
-    }
   h1 {
     @extend %heading;
     font-size: 82px;    

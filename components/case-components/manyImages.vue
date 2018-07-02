@@ -1,20 +1,21 @@
 <template>
     <div class="manyImages">
-         <SVG-filter-image
-          :filterId="item.sys.id"
-          :key="index" 
-          v-for="(item, index) in data.images" 
-          :src="item.fields.url"
-          :src-placeholder="item.fields.base64"       
-        ></SVG-filter-image>  
+      <LazyPicture 
+        v-for="image in data.images"
+        :key="image.sys.id"
+        :title="image.fields.title"
+        :sources="image.fields.sources"
+      >
+      </LazyPicture>
     </div>
 </template>
 <script>
-import SVGFilterImage from "~/components/SVGFilterImage";
+import LazyPicture from '~/components/LazyPicture';
+
 export default {
   props: ['data'],
    components: {
-    SVGFilterImage
+    LazyPicture
   },
 };
 </script>
@@ -33,7 +34,7 @@ export default {
       flex-wrap: wrap;
       width: 100%;
     }
-  .progressive-image {
+  .picture-container {
     width: 48%;
     @media #{$mobile} {
       width: 100%;

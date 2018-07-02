@@ -34,9 +34,11 @@
   .short-description {
     padding: 45px $generalPadding 0;
     max-width: 990px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     @media #{$ipadPortrait} {
       padding-top: 0;
     }

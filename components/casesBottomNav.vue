@@ -1,28 +1,17 @@
 <template>
   <div class="casesBottomNav">
       <nuxt-link :to="prevCase.fields.casePageUrl">
-         <SVG-filter-image v-if="prevCaseMerged.image.sys"
-          :src="prevCaseMerged.image.fields.url"
-          :src-placeholder="prevCaseMerged.image.fields.base64" 
-          :srcset="prevCaseMerged.imageSrcset.fields.images"       
-          :filterId="prevCaseMerged.image.sys.id">
-       </SVG-filter-image>
+       
        <span>Предыдущий кейс</span>
         </nuxt-link>
 
       <nuxt-link :to="nextCase.fields.casePageUrl">
-        <SVG-filter-image v-if="nextCaseMerged.image.sys"
-          :src="nextCaseMerged.image.fields.url"
-          :src-placeholder="nextCaseMerged.image.fields.base64" 
-          :srcset="nextCaseMerged.imageSrcset.fields.images"         
-          :filterId="nextCaseMerged.image.sys.id">
-       </SVG-filter-image>
+      
        <span>Следущий кейс</span>
         </nuxt-link>
   </div>
 </template>
 <script>
-import SVGFilterImage from '~/components/SVGFilterImage';
 export default {
   props: ['nextCase', 'prevCase'],
   data() {
@@ -74,7 +63,7 @@ export default {
     },
   },
   components: {
-    SVGFilterImage,
+    
   },
 };
 </script>
