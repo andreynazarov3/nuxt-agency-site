@@ -1,7 +1,6 @@
 <template>
 <div class="cases">
   <myHeader />
-
   <div class="filters filters-mobile">
       <multiselect 
         v-model="selectedTags" 

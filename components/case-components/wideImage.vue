@@ -21,7 +21,7 @@ export default {
 @import '~/assets/scss/_vars.scss';
 .wideImage {
   padding-top: 80px;
-  max-width: 1565px;
+  max-width: $contentWidth;
   width: 100%;
   margin: 0 auto;
 }

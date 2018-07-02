@@ -1,17 +1,24 @@
 <template>
   <div ref="flickity" class="flickity-wrapper">
-
+    <LazyPicture
+      v-for="image in data.images"
+      :key="image.sys.id"
+      class="flickity-picture" 
+      :title="image.fields.title"
+      :sources="image.fields.sources"
+    >
+    </LazyPicture>
   </div>
 </template>
 <script>
-import SVGFilterImage from '~/components/SVGFilterImage';
+import LazyPicture from '~/components/LazyPicture';
 if (process.browser) {
   var Flickity = require('flickity');
   var ImagesLoaded = require('imagesloaded');
 }
 export default {
   components: {
-    SVGFilterImage,
+    LazyPicture,
   },
   props: ['data'],
   data: function() {
@@ -49,7 +56,7 @@ export default {
   width: 100%;
   max-width: 1565px;
   margin: 80px auto 0 auto;
-  .progressive-image {
+  .flickity-picture {
     width: 50%;
     margin-right: 10px;
     @media #{$mobile} {

@@ -1,98 +1,82 @@
 <template>
   <div class="casesBottomNav">
-      <nuxt-link :to="prevCase.fields.casePageUrl">
-       
-       <span>Предыдущий кейс</span>
-        </nuxt-link>
-
-      <nuxt-link :to="nextCase.fields.casePageUrl">
-      
-       <span>Следущий кейс</span>
-        </nuxt-link>
+      <nuxt-link :to="prevCase.fields.casePageUrl">      
+        <LazyPicture 
+          class="previewPic"          
+          :title="prevCase.fields.previewPic.fields.title"
+          :sources="prevCase.fields.previewPic.fields.sources"
+        >
+        </LazyPicture>          
+        <div class="previewDesc">
+          <p>Предыдущий кейс</p>
+          <h2>{{ prevCase.fields.title }}</h2>
+        </div>
+      </nuxt-link>
+      <nuxt-link :to="nextCase.fields.casePageUrl">      
+         <LazyPicture 
+          class="previewPic"          
+          :title="nextCase.fields.previewPic.fields.title"
+          :sources="nextCase.fields.previewPic.fields.sources"
+        >
+        </LazyPicture> 
+        <div class="previewDesc">
+          <p>Следущий кейс</p>
+          <h2>{{ nextCase.fields.title }}</h2>
+        </div>
+      </nuxt-link>
   </div>
 </template>
 <script>
+import LazyPicture from '~/components/LazyPicture';
 export default {
   props: ['nextCase', 'prevCase'],
-  data() {
-    return {
-      defaultData: {
-        image: {
-          fields: {
-            url: null,
-            base64: null,
-          },
-        },
-        imageSrcset: {
-          fields: {
-            images: null,
-          },
-        },
-        textColor: 'black',
-        text: null,
-        topPadding: false,
-      },
-    };
-  },
-  computed: {
-    nextCaseImage() {
-      if (this.nextCase.fields.components && this.nextCase.fields.components[0]) {
-        return this.nextCase.fields.components[0].fields;
-      } else {
-        return null;
-      }
-    },
-    prevCaseImage() {
-      if (this.prevCase.fields.components && this.prevCase.fields.components[0]) {
-        return this.prevCase.fields.components[0].fields;
-      } else {
-        return null;
-      }
-    },
-    nextCaseMerged() {
-      return {
-        ...this.defaultData,
-        ...this.nextCaseImage,
-      };
-    },
-    prevCaseMerged() {
-      return {
-        ...this.defaultData,
-        ...this.prevCaseImage,
-      };
-    },
-  },
   components: {
-    
-  },
+    LazyPicture
+  }
 };
 </script>
 
 <style lang="scss">
 @import '~/assets/scss/_vars.scss';
 .casesBottomNav {
-  display: flex;
+  display: flex;    
+  
+  @media #{$mobile} {
+      flex-direction: column;
+    }
   a {
+    overflow: hidden;
     display: block;
     position: relative;
     width: 50%;
-    padding-bottom: 20%;
+    height: 250px;        
+    .previewPic {
+      opacity: 0;    
+      transition: opacity 500ms ease;
+    }
+    &:hover {
+      .previewPic {
+    opacity: 0.5;    
+    }   
+    }
+    &:first-child {
+      background-color: #BB6BD9;
+    }
+    &:last-child {
+      background-color: #9B51E0;
+    }
     @media #{$mobile} {
-      padding-bottom: 50%;
+      width: 100%;
+      height: 150px;
     }
-    span {
+    .previewDesc {
       @extend %absolutelyCentered;
-      @extend %p;
+      p, h2 {@extend %p;}
+      h2 {
+        font-size: 25px;
+        font-weight: 700;
+      }
     }
-  }
-  picture {
-    display: block;
-  }
-  .progressive-image {
-    @extend %overlayPosition;
-  }
-  img {
-    width: 100%;
   }
 }
 </style>

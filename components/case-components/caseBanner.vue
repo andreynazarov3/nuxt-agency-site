@@ -40,8 +40,17 @@ export default {
 @import '~/assets/scss/_vars.scss';
 .banner {
   position: relative;
-  overflow: hidden;
-  max-height: 600px;
+  overflow: hidden;  
+  .picture-container {
+    max-height: 600px;
+  }
+  picture, img {
+    max-height: 100%;
+    object-fit: cover;
+  }
+  canvas {
+    max-height: 100%;
+  }
   &-withpadding {
     padding-top: 111px;
   }

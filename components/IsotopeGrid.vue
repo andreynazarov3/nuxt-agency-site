@@ -1,7 +1,12 @@
 <template>
       <div class="isotope-wrapper">
         <div :class="{isVisible: isotopeVisible}" class="isotope-container">         
-          <div ref="isotope-items" class="isotope-item" :key="item.sys.id" v-for="item in cases">
+          <div 
+          ref="isotope-items" 
+          class="isotope-item" 
+          :class="getClasses(item)"
+          :key="item.sys.id"
+          v-for="item in cases">
             <nuxt-link draggable="false" :to="'/cases/'+item.fields.casePageUrl">
             <div class="isotope-item-overlay">                
               </div>   
