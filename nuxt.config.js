@@ -52,7 +52,7 @@ module.exports = {
   css: ["@/assets/scss/style.scss"],
 
   build: {
-    analyze: true,
+    // analyze: true,
     vendor: [
       "babel-polyfill",
       "eventsource-polyfill",
