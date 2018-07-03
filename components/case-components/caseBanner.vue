@@ -42,14 +42,15 @@ export default {
   position: relative;
   overflow: hidden;  
   .picture-container {
-    max-height: 600px;
+    height: 600px;
+    @media #{$mobile} {
+      height: auto;
+    }
   }
-  picture, img {
-    max-height: 100%;
+  picture, img, canvas {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
-  }
-  canvas {
-    max-height: 100%;
   }
   &-withpadding {
     padding-top: 111px;

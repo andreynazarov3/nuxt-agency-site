@@ -14,7 +14,7 @@
         <span>{{data.year.fields.year}}</span>
       </div>
     </div>
-    <div class="undertext">
+    <div class="undertext" v-if="data.underText">
       {{data.underText}}
     </div>
   </div>

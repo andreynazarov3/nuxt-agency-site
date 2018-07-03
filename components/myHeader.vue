@@ -51,7 +51,7 @@ header {
 }
 .header-content {
   width: 100%;
-  max-width: $contentWidth;
+  max-width: 1920px;
   margin: 0 auto;
   height: $headerHeight;
   display: flex;

@@ -5,7 +5,7 @@
         </h2>
         <p>
           {{data.text}}
-          </p>
+        </p>
     </div>
 </template>
 <script>
